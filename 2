@@ -1,0 +1,130 @@
+package foodorder;
+
+public interface oderable {
+	 double price();
+}
+package foodorder;
+
+public abstract class Fooditem implements oderable {
+	protected String name;
+	protected double baseprice;
+	
+public Fooditem(String name , double baseprice ) {
+    this.name = name;
+    this.baseprice = baseprice;
+}
+
+}
+package foodorder;
+
+public class Pizza extends Fooditem {
+	private double toppingsCost;
+
+    public Pizza(String name, double basePrice, double toppingsCost) {
+        super(name, basePrice);
+        this.toppingsCost = toppingsCost;
+    }
+
+	@Override
+	public double price() {
+		// TODO Auto-generated method stub
+		return baseprice + toppingsCost;
+	}
+	@Override
+	public String toString() {
+        return name + ": Rs." + price();
+    }
+
+}
+package foodorder;
+
+public class Burger extends Fooditem {
+	public Burger(String name, double basePrice) {
+        super(name, basePrice);
+    }
+
+    @Override
+    public double price() {
+        return baseprice;
+    }
+    @Override
+    public String toString() {
+        return name + ": Rs." + price();
+    }
+}
+package foodorder;
+
+public class InvalidSizeException extends Exception {
+	public InvalidSizeException(String message) {
+        super(message);
+    }
+package foodorder;
+
+public class Drink extends Fooditem {
+   private String size;
+   public Drink(String name, double basePrice, String size) throws InvalidSizeException {
+       super(name, basePrice);
+       if (!size.equalsIgnoreCase("small") && 
+           !size.equalsIgnoreCase("medium") && 
+           !size.equalsIgnoreCase("large")) {
+           throw new InvalidSizeException("Size must be small, medium, or large");
+       }
+       this.size = size.toLowerCase();
+   }
+   @Override
+   public double price() {
+	// TODO Auto-generated method stub
+	double extra = 0;
+	switch (size) {
+    case "small": extra = 10; break;
+    case "medium": extra = 20; break;
+    case "large": extra = 30; break;
+}
+    return baseprice + extra;
+}
+   @Override
+   public String toString() {
+       return name + " (" + size + "): Rs." + price();
+   }
+
+}
+package foodorder;
+
+import foodorder.*;
+public class Main {
+	 public static void main(String[] args) {
+	        try {
+	            // Creating objects
+	            Pizza p = new Pizza("Pizza", 150, 50);
+	            System.out.println(p);
+
+	            Drink d = new Drink("Coke", 40, "medium");
+	            System.out.println(d);
+
+	            Burger b = new Burger("Burger", 70);
+	            System.out.println(b);
+
+	            // Polymorphism demonstration
+	            oderable[] orders = { p, d, b };
+	            double total = 0;
+	            for (oderable item : orders) {
+	                total += item.price();
+	            }
+
+	            System.out.println("Total Bill: Rs." + total);
+
+	            // Invalid size example to trigger exception
+	            Drink wrong = new Drink("Pepsi", 50, "extraLarge");
+	            System.out.println(wrong);
+
+	        } catch (InvalidSizeException e) {
+	            System.out.println("InvalidSizeException: " + e.getMessage());
+	        }
+	    }
+}
+
+
+
+	
+
+
