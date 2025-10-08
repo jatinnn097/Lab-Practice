@@ -1,0 +1,46 @@
+package palindrome;
+
+public class ArmstrongChecker {
+	boolean isArmstrong(int num) {
+        int originalNum = num;
+        int count = 0;
+        int sum = 0;
+
+        // Count number of digits
+        int temp = num;
+        while (temp > 0) {
+            count++;
+            temp /= 10;
+        }
+
+        // Compute sum of digits raised to the power of count
+        temp = num;
+
+        while (temp > 0) {
+            int digit = temp % 10;
+            sum += Math.pow(digit, count);
+            temp /= 10;
+        }
+
+        // Return true if sum equals original number
+        return sum == originalNum;
+    }
+
+}
+package palindrome;
+
+public class Main {
+	public static void main(String[] args) {
+        ArmstrongChecker checker = new ArmstrongChecker();
+
+        int[] numbers = {153, 9474, 123};
+
+        for (int num : numbers) {
+            if (checker.isArmstrong(num))
+                System.out.println(num + " Armstrong Number");
+            else
+                System.out.println(num + "  Not Armstrong");
+        }
+    }
+
+}
