@@ -1,0 +1,35 @@
+
+public class PalindromeChecker {
+	   
+	boolean isPalindrome(int number) {
+	        String str = Integer.toString(number);
+	        String reversed = new StringBuilder(str).reverse().toString();
+	        return str.equals(reversed);
+	    }
+package palindrome;
+
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        PalindromeChecker checker = new PalindromeChecker();
+
+        int[] rollNumbers = new int[3];
+
+        // Accept 3 roll numbers
+        for (int i = 0; i < 3; i++) {
+            System.out.print("Enter Roll Number " + (i + 1) + ": ");
+            rollNumbers[i] = sc.nextInt();
+        }
+
+        // Check each roll number
+        for (int roll : rollNumbers) {
+            if (checker.isPalindrome(roll))
+                System.out.println("Roll " + roll + " → Palindrome");
+            else
+                System.out.println("Roll " + roll + " → Not Palindrome");
+        }
+
+    }}
+
