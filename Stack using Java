@@ -1,0 +1,28 @@
+import java.util.Stack;
+
+public class Main {
+    public static void main(String[] args) {
+
+        
+        Stack<String> actions = new Stack<>();
+
+       
+        actions.push("Type A");
+        actions.push("Type B");
+        actions.push("Delete C");
+
+       
+        System.out.println("Actions pushed: " + actions);
+
+    
+        if (!actions.isEmpty()) {
+            String undoneAction = actions.pop();
+            System.out.println("Undo → Action removed: " + undoneAction);
+        } else {
+            System.out.println("Stack Underflow! No actions to undo.");
+        }
+
+        // Display stack after undo
+        System.out.println("Stack after undo: " + actions);
+    }
+}
