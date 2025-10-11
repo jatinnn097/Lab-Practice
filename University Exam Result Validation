@@ -1,0 +1,64 @@
+package Exam;
+
+public class InvalidMarksException extends Exception {
+	public InvalidMarksException(String message) {
+        super(message);
+    }
+
+}
+package Exam;
+
+public class StudentResult {
+	 String name;
+	    private int marks[];
+
+	    // Constructor
+	    public StudentResult(String name, int marks[]) {
+	        this.name = name;
+	        this.marks = marks;
+	    }
+
+	    // Method to calculate average marks
+	    public double calculateAverage() throws InvalidMarksException {
+	        int total = 0;
+
+	        for (int m : marks) {
+	            if (m < 0 || m > 100) {
+	                throw new InvalidMarksException("Marks must be between 0 and 100");
+	            }
+	            total += m;
+	        }
+
+	        return (double) total / marks.length;
+	    }
+}
+package Exam;
+
+public class Main {
+	 public static void main(String[] args) {
+	        // Valid students
+	        StudentResult s1 = new StudentResult("Alice", new int[]{80, 90, 70});
+	        StudentResult s2 = new StudentResult("Bob", new int[]{75, 85, 95});
+
+	        try {
+	            System.out.println(s1.name + " → Average = " + s1.calculateAverage());
+	            System.out.println(s2.name + " → Average = " + s2.calculateAverage());
+	        } catch (InvalidMarksException e) {
+	            System.out.println("Exception: " + e);
+	        } finally {
+	            System.out.println("Validation completed");
+	        }
+
+	        // Student with invalid marks
+	        StudentResult s3 = new StudentResult("Charlie", new int[]{50, -20, 60});
+
+	        try {
+	            System.out.println(s3.name + " → Average = " + s3.calculateAverage());
+	        } catch (InvalidMarksException e) {
+	            System.out.println("Exception: " + e);
+	        } finally {
+	            System.out.println("Validation completed");
+	        }
+}
+}
+
