@@ -1,0 +1,72 @@
+package Sports;
+
+public interface Game {
+	 void startMatch();
+	 void showScore();
+}
+package Sports;
+
+public class Cricket implements Game {
+	 private int runs;
+	    private int wickets;
+
+	    public Cricket(int runs, int wickets) {
+	        this.runs = runs;
+	        this.wickets = wickets;
+	    }
+	@Override
+	public void startMatch() {
+		// TODO Auto-generated method stub
+		 System.out.println("Cricket Match Started");
+	}
+
+	@Override
+	public void showScore() {
+		// TODO Auto-generated method stub
+		System.out.println("Score: " + runs + "/" + wickets);
+	}
+}
+package Sports;
+
+public class Football implements Game {
+	 private int goals;
+
+	    public Football(int goals) {
+	        this.goals = goals;
+	    }
+
+	@Override
+	public void startMatch() {
+		// TODO Auto-generated method stub
+		 System.out.println("Football Match Started");
+	}
+
+	@Override
+	public void showScore() {
+		// TODO Auto-generated method stub
+		System.out.println("Score: " + goals + " goals");
+	}
+}
+package Sports;
+
+public class Main {
+	public static void main(String[] args) {
+
+        
+        Game[] matches = new Game[2];
+
+      
+        System.out.println("For Cricket: Runs = 250, Wickets = 6 →");
+        matches[0] = new Cricket(250, 6);
+
+        // For Football
+        System.out.println("For Football: Goals = 3 →");
+        matches[1] = new Football(3);
+
+        // Call methods polymorphically
+        for (Game g : matches) {
+            g.startMatch();
+            g.showScore();
+        }
+    }
+}
