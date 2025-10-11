@@ -1,0 +1,85 @@
+package Student;
+
+public abstract class Student {
+    protected String name;
+    protected int rollNo;
+
+    public Student(String name, int rollNo) {
+        this.name = name;
+        this.rollNo = rollNo;
+    }
+
+    public abstract String getGrade();
+
+}
+package Student;
+
+public class UGStudent extends Student {
+private int marks[];
+
+	public UGStudent(String name, int rollNo,int marks[]) {
+		super(name, rollNo);
+		this.marks=marks;
+		// TODO Auto-generated constructor stub
+	}
+
+	@Override
+	public String getGrade() {
+		// TODO Auto-generated method stub
+		int sum = 0;
+        for (int m : marks) sum += m;
+        double avg = sum / (double) marks.length;
+
+        if (avg >= 70) return "Distinction";
+        else if (avg >= 50) return "Pass";
+        else return "Fail";
+	}
+}
+package Student;
+
+public class PgStudent extends Student {
+private int marks[];
+	public PgStudent(String name, int rollNo,int marks[]) {
+		super(name, rollNo);
+		// TODO Auto-generated constructor stub
+		this.marks=marks;
+	}
+
+	@Override
+	public String getGrade() {
+		// TODO Auto-generated method stub
+		 int sum = 0;
+	        for (int m : marks) sum += m;
+	        double avg = sum / (double) marks.length;
+
+	        if (avg >= 60) return "Pass";
+	        else return "Fail";
+	}
+
+}
+package Student;
+
+
+
+public class Main {
+	public static void main(String[] args) {
+
+        Student[] students = new Student[3];
+
+        // UGStudent: 75, 80, 60 → Distinction
+        students[0] = new UGStudent("UG1", 101, new int[]{75, 80, 60});
+
+        // UGStudent: 40, 45, 50 → Pass
+        students[1] = new UGStudent("UG2", 102, new int[]{40, 45, 50});
+
+        // PGStudent: 55, 50, 45 → Fail
+        students[2] = new PgStudent("PG1", 201, new int[]{55, 50, 45});
+
+        
+        System.out.println("For UGStudent with marks 75, 80, 60 → " + students[0].getGrade());
+        System.out.println("For UGStudent with marks 40, 45, 50 → " + students[1].getGrade());
+        System.out.println("For PGStudent with marks 55, 50, 45 → " + students[2].getGrade());
+        	
+        }
+    }
+
