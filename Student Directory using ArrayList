@@ -1,0 +1,95 @@
+package Student;
+
+public class Student {
+	 private int rollNo;
+	    private String name;
+
+	    // Constructor
+	    public Student(int rollNo, String name) {
+	        this.rollNo = rollNo;
+	        this.name = name;
+	    }
+
+	    // Getters
+	    public int getRollNo() {
+	        return rollNo;
+	    }
+
+	    public String getName() {
+	        return name;
+	    }
+
+	    // For display
+	    @Override
+	    public String toString() {
+	        return rollNo + " - " + name;
+	    }
+	}
+package Student;
+ 
+
+import java.util.ArrayList;
+
+public class StudentDirectory {
+    private ArrayList<Student> students = new ArrayList<>();
+
+    // Add student
+    public void addStudent(Student s) {
+        students.add(s);
+        System.out.println("Added: Roll " + s.getRollNo() + ", " + s.getName());
+    }
+
+    // Remove student by roll number
+    public void removeStudent(int rollNo) {
+        for (Student s : students) {
+            if (s.getRollNo() == rollNo) {
+                students.remove(s);
+                System.out.println("Removed: Roll " + rollNo + " → " + s.getName());
+                return;
+            }
+        }
+        System.out.println("Roll " + rollNo + " not found.");
+    }
+
+    // Search student by roll number
+    public void searchStudent(int rollNo) {
+        for (Student s : students) {
+            if (s.getRollNo() == rollNo) {
+                System.out.println("Found: " + s.getName());
+                return;
+            }
+        }
+        System.out.println("Not Found");
+    }
+
+    // Display all students
+    public void displayAll() {
+        System.out.println("\nFinal Student List:");
+        for (Student s : students) {
+            System.out.println(s);
+        }
+    }
+}
+package Student;
+
+public class Main {
+    public static void main(String[] args) {
+        StudentDirectory dir = new StudentDirectory();
+
+        // Adding 3 students
+        dir.addStudent(new Student(101, "Alice"));
+        dir.addStudent(new Student(102, "Bob"));
+        dir.addStudent(new Student(103, "Charlie"));
+
+        // Removing one student
+        dir.removeStudent(102);
+
+        // Searching for roll number 103
+        dir.searchStudent(103);
+
+        // Display final list
+        dir.displayAll();
+    }
+
+}
+
