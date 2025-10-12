@@ -1,0 +1,73 @@
+package Railway;
+
+public class Reservation {
+	  private int availableSeats;
+
+	    public Reservation(int availableSeats) {
+	        this.availableSeats = availableSeats;
+	    }
+	    public synchronized void bookTicket(String passenger, int seats) {
+	        System.out.println(passenger + " is trying to book " + seats + " seats...");
+
+	        if (seats > availableSeats) {
+	            System.out.println("Not enough seats for " + passenger + ". Waiting...");
+	            try {
+	                wait(); // wait until notified
+	            } catch (InterruptedException e) {
+	                e.printStackTrace();
+	            }
+	        }
+	        if (seats <= availableSeats) {
+	            availableSeats -= seats;
+	            System.out.println(passenger + " booked " + seats + " seats successfully.");
+	            System.out.println("Remaining seats: " + availableSeats);
+	            notifyAll(); // wake up waiting threads
+	        } else {
+	            System.out.println("Still not enough seats for " + passenger + ".");
+	        }
+	    }
+}
+package Railway;
+
+public class Passenger extends Thread {
+private  Reservation res;
+private  String passengerName;
+private  int seatsNeeded ;
+
+public Passenger(Reservation res, String passengerName, int seatsNeeded) {
+    this.res = res;
+    this.passengerName = passengerName;
+    this.seatsNeeded = seatsNeeded;
+}
+@Override
+public void run() {
+    res.bookTicket(passengerName, seatsNeeded);
+}
+}
+package Railway;
+
+public class Main {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		 Reservation reservation = new Reservation(5); // total available seats = 5
+
+	        Passenger p1 = new Passenger(reservation, "Passenger1", 3);
+	        Passenger p2 = new Passenger(reservation, "Passenger2", 2);
+	        Passenger p3 = new Passenger(reservation, "Passenger3", 1);
+
+	        try {
+	            p1.start();
+	            p1.join(); // Wait until Passenger1 finishes
+
+	            p2.start();
+	            p2.join(); // Wait until Passenger2 finishes
+
+	            p3.start();
+	            p3.join(); // Wait until Passenger3 finishes
+	        } catch (InterruptedException e) {
+	            e.printStackTrace();
+	        }
+	}
+
+}
