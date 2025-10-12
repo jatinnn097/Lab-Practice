@@ -88,41 +88,43 @@ public class Drink extends Fooditem {
    }
 
 }
-package foodorder;
+package FoodOrder;
 
-import foodorder.*;
 public class Main {
-	 public static void main(String[] args) {
-	        try {
-	            // Creating objects
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		 try {
+	           
 	            Pizza p = new Pizza("Pizza", 150, 50);
-	            System.out.println(p);
+	            System.out.println("Pizza: Rs." + p.Price());
 
+	          
 	            Drink d = new Drink("Coke", 40, "medium");
-	            System.out.println(d);
+	            System.out.println("Drink (medium): Rs." + d.Price());
 
+	           
 	            Burger b = new Burger("Burger", 70);
-	            System.out.println(b);
+	            System.out.println("Burger: Rs." + b.Price());
 
-	            // Polymorphism demonstration
-	            oderable[] orders = { p, d, b };
+	           
+	            Orderable[] orders = {p, d, b};
+
 	            double total = 0;
-	            for (oderable item : orders) {
-	                total += item.price();
+	            for (Orderable o : orders) {
+	                total += o.Price();
 	            }
 
 	            System.out.println("Total Bill: Rs." + total);
 
-	            // Invalid size example to trigger exception
-	            Drink wrong = new Drink("Pepsi", 50, "extraLarge");
-	            System.out.println(wrong);
+	           
 
 	        } catch (InvalidSizeException e) {
 	            System.out.println("InvalidSizeException: " + e.getMessage());
 	        }
-	    }
-}
+	}
 
+}
 
 
 	
