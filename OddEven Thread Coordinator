@@ -1,0 +1,52 @@
+package odd_even;
+
+public class NumberCoordinator {
+	 private int count = 1;
+	    private final int MAX = 10;
+
+	    public synchronized void printOdd() {
+	        while (count <= MAX) {
+	            if (count % 2 == 0) {
+	                try {
+	                    wait();
+	                } catch (InterruptedException e) {
+	                    e.printStackTrace();
+	                }
+	            } else {
+	                System.out.println("Odd: " + count);
+	                count++;
+	                notify();
+	            }
+	        }
+	    }
+public synchronized void printEven() {
+    while (count <= MAX) {
+        if (count % 2 != 0) {
+            try {
+                wait();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        } else {
+            System.out.println("Even: " + count);
+            count++;
+            notify();
+        }
+    }
+}
+}
+
+
+public static void main(String[] args) {
+        NumberCoordinator coordinator = new NumberCoordinator();
+
+        // Thread for odd numbers
+        Thread oddThread = new Thread(() -> coordinator.printOdd());
+
+        // Thread for even numbers
+        Thread evenThread = new Thread(() -> coordinator.printEven());
+
+        // Start both threads
+        oddThread.start();
+        evenThread.start();
+    }
