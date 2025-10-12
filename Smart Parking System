@@ -1,0 +1,92 @@
+package car;
+
+public abstract class Vechicle1 {
+	 protected String numberPlate;
+	    protected String ownerName;
+
+	    public  Vechicle1(String numberPlate, String ownerName) {
+	        this.numberPlate = numberPlate;
+	        this.ownerName = ownerName;
+	        System.out.println("Vehicle constructor called");
+	    }
+
+	    public abstract void park();
+}
+package car;
+
+public class Car extends Vechicle1 {
+	  public Car(String numberPlate, String ownerName) {
+	        super(numberPlate, ownerName);
+	        System.out.println("Car constructor called");
+	    }
+	@Override
+	public void park() {
+		// TODO Auto-generated method stub
+		System.out.println("Car with number " + numberPlate + " parked in Car slot.");
+	}
+
+}
+package car;
+
+public class Bike extends Vechicle1 {
+
+	public Bike(String numberPlate, String ownerName) {
+		super(numberPlate, ownerName);
+		 System.out.println("Bike constructor called");
+		// TODO Auto-generated constructor stub
+	}
+
+	@Override
+	public void park() {
+		// TODO Auto-generated method stub
+		  System.out.println("Bike with number " + numberPlate + " parked in Bike slot.");
+	}
+
+}
+package car;
+
+public interface Chargeable {
+	 void charge(int minutes);
+}
+package car;
+
+public class ElectricCar extends Car implements Chargeable {
+
+	public ElectricCar(String numberPlate, String ownerName) {
+		super(numberPlate, ownerName);
+		// TODO Auto-generated constructor stub
+	}
+	@Override
+	public void park() {
+		System.out.println("Plugging into charging station...");
+        super.park();
+	}
+
+	@Override
+	public void charge(int minutes) {
+		// TODO Auto-generated method stub
+		double cost = minutes * 2.5;
+        System.out.println("Charging cost: " + cost);
+	}
+}
+package car;
+
+public class Main {
+	public static void main(String[] args) {
+     
+        ElectricCar eCar = new ElectricCar("KA05EV5678", "Ramesh");
+
+       
+        eCar.park();
+
+        eCar.charge(30);
+
+        System.out.println();
+
+       
+        Car car = new Car("KA01AB1234", "Suresh");
+        car.park();
+
+      
+    }
+}
