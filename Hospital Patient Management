@@ -1,0 +1,63 @@
+package Hospital;
+
+public abstract class Patient {
+	 protected String name;
+	    protected int age;
+
+	    public Patient(String name, int age) {
+	        this.name = name;
+	        this.age = age;
+	    }
+
+	    public abstract String getDetails();
+}
+package Hospital;
+
+public class InPatient extends Patient {
+private int roomNumber;
+	public InPatient(String name, int age,int roomNumber) {
+		super(name, age);
+		this.roomNumber=roomNumber;
+		// TODO Auto-generated constructor stub
+	}
+
+	@Override
+	public String getDetails() {
+		System.out.println("For an InPatient named" + name + "age" + age +"room"+ roomNumber+ "->");
+		return "InPatient:"+ name+", Age:" + age + " , Room:" + roomNumber  ;
+	}
+
+}
+package Hospital;
+
+public class OutPatient extends Patient {
+private String  consultingDoctor; 
+	public OutPatient(String name, int age , String  consultingDoctor) {
+		super(name, age);
+		this.consultingDoctor=consultingDoctor;
+		// TODO Auto-generated constructor stub
+	}
+
+	@Override
+	public String getDetails() {
+		// TODO Auto-generated method stub
+		return "outPatient:"+name+",Age:"+age+"Doctor:"+consultingDoctor;
+	}
+
+}
+package Hospital;
+
+public class Main {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		Patient[] patients = new Patient[2];
+        patients[0] = new InPatient("John", 40, 203);
+        patients[1] = new OutPatient("Alice", 25, "Dr. Smith");
+
+        for (Patient p : patients) {
+            System.out.println(p.getDetails());
+        }
+	}
+
+}
