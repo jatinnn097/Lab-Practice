@@ -1,0 +1,83 @@
+package generating;
+
+public class NumberBox {
+	private int number;
+    private boolean hasValue = false;
+
+   
+    public synchronized void setNumber(int n) {
+        try {
+            while (hasValue) {   
+                wait();
+            }
+            number = n;
+            hasValue = true;
+            System.out.println("Generated: " + n);
+            notify();       
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    // Consumer: gets the number
+    public synchronized int getNumber() {
+        int n = 0;
+        try {
+            while (!hasValue) { 
+                wait();
+            }
+            n = number;
+            hasValue = false;
+            System.out.println("Printed: " + n);
+            notify();            // Notify the producer
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return n;
+    }
+}
+package generating;
+
+public class Generator extends Thread {
+	 private NumberBox box;
+
+	    public Generator(NumberBox box) {
+	        this.box = box;
+	    }
+
+	    @Override
+	    public void run() {
+	        for (int i = 1; i <= 5; i++) {
+	            box.setNumber(i);
+	        }
+	    }
+}
+package generating;
+
+public class Printer extends Thread {
+	private NumberBox box;
+
+    public Printer(NumberBox box) {
+        this.box = box;
+    }
+
+    @Override
+    public void run() {
+        for (int i = 1; i <= 5; i++) {
+            box.getNumber();
+        }
+    }
+}
+package generating;
+
+public class Main {
+	 public static void main(String[] args) {
+	        NumberBox box = new NumberBox();
+
+	        Generator generator = new Generator(box);
+	        Printer printer = new Printer(box);
+
+	        generator.start();
+	        printer.start();
+	    }
+}
