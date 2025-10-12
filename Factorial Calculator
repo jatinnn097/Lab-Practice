@@ -1,0 +1,30 @@
+package factorial;
+
+public class FactorialCalculator {
+	  public long factorial(int n) {
+	        if (n == 0) return 1; // Special case: 0! = 1
+
+	        long fact = 1;
+	        for (int i = 1; i <= n; i++) {
+	            fact *= i;
+	        }
+	        return fact;
+	    }
+}
+package factorial;
+
+public class Main {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		FactorialCalculator calculator = new FactorialCalculator();
+
+        // Numbers to calculate factorial
+        int[] numbers = {5, 0, 7};
+
+        for (int num : numbers) {
+            System.out.println(num + "! = " + calculator.factorial(num));
+        }
+	}
+
+}
