@@ -1,0 +1,35 @@
+package prime;
+
+public class PrimeChecker {
+	public boolean isPrime(int num) {
+        if (num <= 1) return false; // Numbers ≤ 1 are not prime
+
+        for (int i = 2; i * i <= num; i++) {
+            if (num % i == 0) {
+                return false; // Found a divisor, not prime
+            }
+        }
+        return true; // No divisors found, number is prime
+    }
+}
+package prime;
+
+public class Main {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		PrimeChecker checker = new PrimeChecker();
+
+        // Test numbers
+        int[] numbers = {2, 11, 25, 1, 29};
+
+        for (int num : numbers) {
+            if (checker.isPrime(num)) {
+                System.out.println(num + " → Prime");
+            } else {
+                System.out.println(num + " → Not Prime");
+            }
+        }
+	}
+
+}
