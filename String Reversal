@@ -1,0 +1,28 @@
+package StringReverser;
+
+public class StringReverser {
+	 public String reverse(String s) {
+		 String reversed = "";
+	        for (int i = s.length() - 1; i >= 0; i--) {
+	            reversed += s.charAt(i);}
+		return reversed;
+}
+}
+
+package StringReverser;
+
+public class Main {
+	 public static void main(String[] args) {
+	        StringReverser reverser = new StringReverser();
+
+	        // Input: 3 different names
+	        String name1 = "Alice";
+	        String name2 = "Bob";
+	        String name3 = "Charlie";
+
+	        // Call reverse() and display output
+	        System.out.println("Input: " + name1 + " → Output: " + reverser.reverse(name1));
+	        System.out.println("Input: " + name2 + " → Output: " + reverser.reverse(name2));
+	        System.out.println("Input: " + name3 + " → Output: " + reverser.reverse(name3));
+	    }
+}
