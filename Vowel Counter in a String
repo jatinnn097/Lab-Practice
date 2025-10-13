@@ -16,32 +16,15 @@ public class VowelCounter {
 }
 }
 
-package Vowel;
-
-import java.util.Scanner;
-
 public class Main {
-	
-	    public static void main(String[] args) {
-	        Scanner sc = new Scanner(System.in);
-	        VowelCounter vc = new VowelCounter();
+    public static void main(String[] args) {
+        VowelCounter vc = new VowelCounter();
 
-	        // Input at least 2 sentences
-	        System.out.print("Enter first sentence: ");
-	        String sentence1 = sc.nextLine();
+        // Input sentences (can also be replaced with Scanner input if needed)
+        String s1 = "Hello World";
+        String s2 = "Java Programming";
 
-	        System.out.print("Enter second sentence: ");
-	        String sentence2 = sc.nextLine();
-
-	        // Call countVowels() for each
-	        int count1 = vc.countVowels(sentence1);
-	        int count2 = vc.countVowels(sentence2);
-
-	        // Display output
-	        System.out.println("Input: \"" + sentence1 + "\" → Vowels = " + count1);
-	        System.out.println("Input: \"" + sentence2 + "\" → Vowels = " + count2);
-
-	        sc.close();
-	    }
-
+        System.out.println("Input: \"" + s1 + "\" → Vowels = " + vc.countVowels(s1));
+        System.out.println("Input: \"" + s2 + "\" → Vowels = " + vc.countVowels(s2));
+    }
 }
