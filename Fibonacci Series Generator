@@ -5,7 +5,7 @@ public class FibonacciGenerator {
 		 
 		 int a=0 ,b=1;
 		 System.out.println("Fibonacci Series:");        
-		 for (int i = 1; i <= n; i++) {
+		 for (int i=1; i <= n; i++) {
 	            System.out.print(a + " ");
 	            int next = a + b;
 	            a = b;
@@ -15,19 +15,12 @@ public class FibonacciGenerator {
 	 }
 }
 package fib;
-
-import java.util.Scanner;
-
 public class Main {
-	public static void main(String[] args) {
-	Scanner sc = new Scanner(System.in);
-	System.out.print("Enter how many Fibonacci numbers to generate: ");
-    int n = sc.nextInt();
+    public static void main(String[] args) {
+        FibonacciGenerator fg = new FibonacciGenerator();
 
-    FibonacciGenerator fg = new FibonacciGenerator();
-    fg.generate(n);
-
-			
-	}
+        int n = 7; // Example: You can change this value for testing
+        fg.generate(n);
+    }
 }
 
