@@ -22,12 +22,9 @@ package LinkedList;
 import java.util.LinkedList;
 
 public class Library {
-	  LinkedList<Book> books;
+	  LinkedList<Book> books = new LinkedList<>();
 
-	    public Library() {
-	        books = new LinkedList<>();
-	    }
-
+	  
 	  
 	    public void addBook(Book b) {
 	        books.add(b);
