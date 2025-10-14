@@ -40,13 +40,20 @@ public synchronized void printEven() {
 public static void main(String[] args) {
         NumberCoordinator coordinator = new NumberCoordinator();
 
-        // Thread for odd numbers
-        Thread oddThread = new Thread(() -> coordinator.printOdd());
+      Thread oddThread = new Thread(new Runnable() {
+            public void run() {
+                coordinator.printOdd();
+            }
+        });
 
-        // Thread for even numbers
-        Thread evenThread = new Thread(() -> coordinator.printEven());
+        Thread evenThread = new Thread(new Runnable() {
+            public void run() {
+                coordinator.printEven();
+            }
+        });
 
         // Start both threads
         oddThread.start();
         evenThread.start();
     }
+}
